@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task</title>
+</head>
+
+<style>
+    .flex-container {
+        display: flex;
+        width: 15rem;
+        flex-wrap: wrap;
+        column-gap: 0.3rem;
+        row-gap: 0.3rem;
+
+    }
+
+    .flex-container div {
+        width: 75px;
+        height: 65px;
+        color: white;
+    }
+
+    .flex-container div {
+        background: #6F98A8;
+    }
+
+    .center-item {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .container {
+        position: absolute;
+        left: 50%;
+        transform: translate(-50%, 0%);
+        background: #EFEFEF;
+        width: 23rem;
+    }
+
+    p {
+        text-align: center;
+    }
+
+    .flex-gap {
+        display: flex;
+        position: absolute;
+        right: 2rem;
+        column-gap: 1.2rem;
+        flex-direction: column;
+    }
+
+    .flex-gap div {
+        background: #2B8EAD;
+        width: 5rem;
+        height: 1.5rem;
+        margin-top: 0.3rem;
+        border-radius: 0.3rem;
+        text-align: center;
+        cursor: pointer;
+    }
+
+    @media screen and (max-width: 568px) {
+        .flex-container {
+            display: block;
+            width: 100%;
+        }
+
+        .flex-container div {
+            width: 100%;
+            margin: 0.3rem 0rem;
+        }
+
+        .flex-gap {
+            display: flex;
+            position: relative;
+            flex-direction: row;
+            margin: 1rem;
+            align-items: center;
+            justify-content: center;
+        }
+    }
+</style>
+
+<body>
+
+    <p>Shuffle and Sort</p>
+    <div class="container">
+        <div class="flex-gap">
+            <div onclick="actShuffle()">SHUFFLE</div>
+            <div onclick="actSort()">SORT</div>
+        </div>
+
+        <div class="flex-container"></div>
+    </div>
+</body>
+
+<script>
+
+
+    let arr = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+    let arrColor = [
+        "#2B8EAD",
+        "#6F98A8",
+        "#BFBFBF",
+        "#2F454E",
+        "#2B8EAD",
+        "#6F98A8",
+        "#72C3DC",
+        "#6F98A8",
+        "#72C3DC",
+
+    ]
+
+    let flex_container = document.querySelector(".flex-container");
+
+    function generate(arr) {
+        for (let index = 0; index < arr.length; index++) {
+            let item = arr[index]
+            let newDiv = document.createElement("div");
+            newDiv.classList.add("flex-item");
+            newDiv.classList.add("center-item");
+            newDiv.style.backgroundColor = arrColor[item]
+            newDiv.id = `id-${item}`;
+            newDiv.innerHTML = item;
+            flex_container.appendChild(newDiv);
+        }
+    }
+    generate(arr);
+
+    function actShuffle() {
+        let shuffleArr = arr.sort(() => Math.random() - 0.9);
+        flex_container.innerHTML = "";
+        generate(shuffleArr);
+    }
+    function actSort() {
+        let sortArr = arr.sort((a, b) => a - b);
+        flex_container.innerHTML = "";
+        generate(sortArr);
+    }
+
+
+</script>
+
+</html>
